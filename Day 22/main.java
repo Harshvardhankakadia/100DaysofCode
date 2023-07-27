@@ -1,21 +1,23 @@
 class Solution {
-    public:
-        vector<int> generateRow(int row){
-            long long ans = 1;
-            vector<int> ansRow;
-            ansRow.push_back(1);
-            for(int col = 1; col<row; col++){
-                ans = ans*(row-col);
-                ans = ans/(col);
-                ansRow.push_back(ans);
+    public List<List<Integer>> generate(int n) {
+        
+        List< List<Integer>> arr = new ArrayList<>();
+        ArrayList<Integer> first = new ArrayList<>();
+        first.add(1);
+        arr.add(first);
+
+        for (int i = 1; i < n; i++) {
+            ArrayList<Integer> temp = new ArrayList<>();
+            temp.add(1);
+            List<Integer> prev = arr.get(i-1);
+            for (int j = 1; j < prev.size(); j++)
+            {
+                temp.add( prev.get(j-1)+prev.get(j) );
             }
-            return ansRow;
+            temp.add(1);
+            arr.add( temp);
         }
-        vector<vector<int>> generate(int numRows) {
-            vector<vector<int>> ans;
-            for(int i = 1; i <= numRows; i++){
-                ans.push_back(generateRow(i));
-            }
-            return ans;
-        }
-    };
+        return arr;
+
+    }
+}
